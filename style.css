@@ -1,0 +1,49 @@
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+html {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  display:  grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+.logo {
+  grid-column-start: 1;
+}
+.logo img {
+  max-height: 2.5em;
+}
+.logo h1 {
+  display: inline-flex;
+}
+.main-nav {
+  grid-column-start: 3;
+  grid-column-end: -1;
+  display: flex;
+  align-items: center;
+}
+.main-nav ul {
+  padding: 0;
+  list-style: none;
+}
+.main-nav ul li {
+}
+.hero {
+  grid-column-start: 1;
+  grid-column-end: 6;
+}
+.hero img {
+  max-width: 100%;
+}
+.content {
+  border: 1px solid green;
+  grid-column-start: 2;
+  grid-column-end: 5;
+  min-height: 200px;
+}
