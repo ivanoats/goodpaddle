@@ -7,6 +7,7 @@ html {
 body {
   margin: 0;
   padding: 0;
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, Helvetica, Arial, sans-serif
 }
 .container {
   display:  grid;
@@ -14,25 +15,32 @@ body {
   grid-template-rows: 20% 20% 20% 20% 20%;
 }
 .logo {
+  align-items: center;
   grid-column-start: 1;
 }
 .logo img {
+  /* margin-left: .5em; */
   max-height: 2.5em;
 }
 .logo h1 {
+  margin-left: 0.5em;
   display: inline-flex;
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, Helvetica, Arial, sans-serif
+  /* font-family: Rockwell, "Courier Bold", Courier, Georgia, Times, "Times New Roman", serif;  */
 }
 .main-nav {
   grid-column-start: 3;
   grid-column-end: -1;
-  display: flex;
   align-items: center;
 }
 .main-nav ul {
-  padding: 0;
+  display: flex;
   list-style: none;
 }
 .main-nav ul li {
+  /* padding: 0 2em; */
+  margin-left: auto;
+  margin-right: auto;
 }
 .hero {
   grid-column-start: 1;
@@ -42,7 +50,6 @@ body {
   max-width: 100%;
 }
 .content {
-  border: 1px solid green;
   grid-column-start: 2;
   grid-column-end: 5;
   min-height: 200px;
