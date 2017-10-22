@@ -1,6 +1,6 @@
 *,
- *:before,
- *:after {
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
@@ -21,8 +21,8 @@ body {
 }
 
 .logo {
-  margin-top: 0.5em;
   align-items: center;
+  margin-top: 0.5em;
   grid-column-start: 1;
 }
 
@@ -30,6 +30,7 @@ body {
   display: inline-flex;
   font-family: "Century Gothic", CenturyGothic, AppleGothic, Helvetica, Arial, sans-serif;
   font-size: 2em;
+  padding: 0.5em;
   margin-left: 0.5em;
 }
 
