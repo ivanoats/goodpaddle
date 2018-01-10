@@ -25,6 +25,12 @@ body {
   grid-template-rows: repeat(5, 20% );
 }
 
+header {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-column: 1 / 6;
+}
+
 .logo {
   align-items: center;
   margin-top: 0.5em;
