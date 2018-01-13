@@ -15,7 +15,8 @@ html {
 
 body {
   font-family: "Century Gothic", CenturyGothic, AppleGothic, Helvetica, Arial, sans-serif;
-  margin: 0;
+  margin-left: 5vw auto;
+  margin-right: 5vw auto;
   padding: 0;
 }
 
@@ -26,57 +27,105 @@ body {
 }
 
 header {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-column: 1 / 6;
-}
-
-.logo {
-  align-items: center;
-  margin-top: 0.5em;
-  grid-column: 1 / 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 90%;
+  margin-left: 5vw;
+  margin-right: 5vw;
 }
 
 .logotype {
-  display: inline-flex;
   font-family: "Century Gothic", CenturyGothic, AppleGothic, Helvetica, Arial, sans-serif;
   font-size: 2em;
-  padding: 0.5em;
-  margin-left: 0.5em;
-}
-
-.logo img {
-  max-height: 2.5em;
+  padding: 0.3em;
 }
 
 .main-nav {
-  grid-column: 3 / -1;
   margin-top: 0.5em;
+}
+
+.nav-wrapper {
+  margin: 0 auto;
+  max-width:960px;
+  padding: 0;
 }
 
 .main-nav ul {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   list-style: none;
-  padding: 0.5em;
+  padding: 0;
+  margin: 15px;
+  width: 50%;
 }
 
 .main-nav ul li {
   margin-left: 0.5em;
   margin-right: 0.5em;
+  display: inline-block;
 }
 
 .main-nav ul li a {
   color: #000;
-  display: block;
   padding: 1em;
   text-decoration: none;
+  transition: all .5s ease;
 }
 
 .main-nav ul li a:hover {
   background-color: #000;
   color: #fff;
   padding: 1em;
+}
+
+#menu-toggle {display: none;}
+
+.label-toggle {display: none;}
+
+@media screen and (max-width: 768px) {
+  .main-nav ul a {
+    color: #00f;
+  }
+
+  .main-nav ul {
+    background-color: red;
+    display: block;
+    height: 0;
+    list-style-type: none;
+    opacity: 0;
+    text-align: center;
+    transition: all 1s ease;
+    width: 100%;
+    visibility: hidden;
+  }
+  
+  .main-nav li {
+    border-bottom: 2px solid #53354a;
+    color: #53354a;
+    display: block;
+    font-size: 1.5em;
+    padding: 2em 0;
+  }
+
+  #menu-toggle:checked ~ ul {
+    display: block;
+    opacity: 1;
+    height: 100vh;
+    visibility: visible;
+  }
+  
+  .label-toggle {
+    background-image: url('images/hamburger.svg');
+    /* background: linear-gradient(to bottom, #555 0%, #555 20%, transparent 20%, transparent 40%, #555 40%, #E84545 60%, transparent 60%, transparent 80%, #E84545 80%, #E84545 100%); */
+    cursor: pointer;
+    display: block;
+    float: right;
+    height: 35px;
+    width: 35px;
+  }
+  
+  .nav-wrapper {display: block;}
 }
 
 .hero {
@@ -91,6 +140,5 @@ header {
 .content {
   grid-column: 2 / 5;
   grid-row-start: 3;
-  margin: 1.5em;
   min-height: 200px;
 }
