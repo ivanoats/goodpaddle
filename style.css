@@ -89,38 +89,36 @@ header {
   }
 
   .main-nav ul {
-    background-color: red;
     display: block;
     height: 0;
     list-style-type: none;
     opacity: 0;
-    text-align: center;
+    text-align: left;
     transition: all 1s ease;
     width: 100%;
     visibility: hidden;
   }
   
   .main-nav li {
-    border-bottom: 2px solid #53354a;
-    color: #53354a;
+    border: 1px solid rgb(121, 121, 121);
+    border-radius: 1em;
     display: block;
+    width: 70%;
+    margin: 0.3em;
     font-size: 1.5em;
-    padding: 2em 0;
+    padding: 0.6em 0;
   }
 
-  #menu-toggle:checked ~ ul {
-    display: block;
+  #menu-toggle:checked ~ nav ul {
     opacity: 1;
-    height: 100vh;
+    height: 35vh;
     visibility: visible;
   }
   
   .label-toggle {
-    background-image: url('images/hamburger.svg');
-    /* background: linear-gradient(to bottom, #555 0%, #555 20%, transparent 20%, transparent 40%, #555 40%, #E84545 60%, transparent 60%, transparent 80%, #E84545 80%, #E84545 100%); */
+    background: url('images/hamburger.svg') no-repeat;
     cursor: pointer;
     display: block;
-    float: right;
     height: 35px;
     width: 35px;
   }
