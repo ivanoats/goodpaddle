@@ -28,6 +28,7 @@ body {
 
 header {
   display: flex;
+  /* flex-wrap: wrap; */
   justify-content: space-between;
   align-items: flex-end;
   width: 90%;
@@ -93,7 +94,7 @@ header {
     height: 0;
     list-style-type: none;
     opacity: 0;
-    text-align: left;
+    text-align: center;
     transition: all 1s ease;
     width: 100%;
     visibility: hidden;
@@ -102,11 +103,10 @@ header {
   .main-nav li {
     border: 1px solid rgb(121, 121, 121);
     border-radius: 1em;
-    display: block;
     width: 70%;
-    margin: 0.3em;
+    margin: 0 0 0.3em 0;
     font-size: 1.5em;
-    padding: 0.6em 0;
+    padding: 0.3em;
   }
 
   #menu-toggle:checked ~ nav ul {
@@ -116,11 +116,10 @@ header {
   }
   
   .label-toggle {
-    background: url('images/hamburger.svg') no-repeat;
+    background: no-repeat right url('images/hamburger.svg');
     cursor: pointer;
     display: block;
     height: 35px;
-    width: 35px;
   }
   
   .nav-wrapper {display: block;}
