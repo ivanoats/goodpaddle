@@ -122,7 +122,17 @@ header {
     height: 35px;
   }
   
-  .nav-wrapper {display: block;}
+  .logotype {
+    font-size: 1.7em;
+    padding: 0;
+  }
+  .logo {
+    width: 20%;
+  }
+  .main-nav {
+    10px;
+  }
+  /* .nav-wrapper {display: block;} */
 }
 
 .hero {
