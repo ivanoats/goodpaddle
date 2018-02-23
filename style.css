@@ -179,9 +179,17 @@ header {
   border-radius: 10%;
 }
 
+.hero h2:hover {
+  background: rgba(10, 10, 10, 0.4);
+}
+
 .hero a {
   color: #222;
   text-decoration: none;
+}
+
+.hero a:hover {
+  color: #eee;
 }
 
 .hero img {
