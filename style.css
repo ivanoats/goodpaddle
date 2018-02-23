@@ -4,7 +4,8 @@
   box-sizing: inherit;
 }
 
-ol, ul {
+ol,
+ul {
   margin: 0;
   padding: 0;
 }
@@ -14,7 +15,8 @@ html {
 }
 
 body {
-  font-family: "Century Gothic", CenturyGothic, AppleGothic, Helvetica, Arial, sans-serif;
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, Helvetica, Arial,
+    sans-serif;
   margin-left: 5vw auto;
   margin-right: 5vw auto;
   padding: 0;
@@ -24,7 +26,7 @@ body {
 .container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 20% );
+  grid-template-rows: repeat(5, 20%);
 }
 
 header {
@@ -38,7 +40,8 @@ header {
 }
 
 .logotype {
-  font-family: "Century Gothic", CenturyGothic, AppleGothic, Helvetica, Arial, sans-serif;
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, Helvetica, Arial,
+    sans-serif;
   font-size: 2em;
   padding: 0.3em;
 }
@@ -49,7 +52,7 @@ header {
 
 .nav-wrapper {
   margin: 0 auto;
-  max-width:960px;
+  max-width: 960px;
   padding: 0;
 }
 
@@ -72,7 +75,7 @@ header {
   color: #000;
   padding: 1em;
   text-decoration: none;
-  transition: all .5s ease;
+  transition: all 0.5s ease;
 }
 
 .main-nav ul li a:hover {
@@ -81,9 +84,13 @@ header {
   padding: 1em;
 }
 
-#menu-toggle {display: none;}
+#menu-toggle {
+  display: none;
+}
 
-.label-toggle {display: none;}
+.label-toggle {
+  display: none;
+}
 
 @media screen and (max-width: 768px) {
   .main-nav ul a {
@@ -100,7 +107,7 @@ header {
     width: 100%;
     visibility: hidden;
   }
-  
+
   .main-nav li {
     border: 1px solid rgb(121, 121, 121);
     border-radius: 1em;
@@ -115,14 +122,14 @@ header {
     height: 35vh;
     visibility: visible;
   }
-  
+
   .label-toggle {
-    background: no-repeat right url('images/hamburger.svg');
+    background: no-repeat right url("images/hamburger.svg");
     cursor: pointer;
     display: block;
     height: 35px;
   }
-  
+
   .logotype {
     font-size: 1.7em;
     padding: 0;
@@ -130,23 +137,80 @@ header {
   .logo {
     width: 15%;
   }
-  .main-nav {
-    10px;
+  .content {
+    font-size: 0.6em;
+    line-height: 1em;
   }
   /* .nav-wrapper {display: block;} */
 }
 
 .hero {
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  /* grid-gap: 2em; */
+  display: grid;
   grid-column: 1 / 6;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero h1 {
+  background: rgba(10, 10, 10, 0.4);
+  grid-column: 1 / -1;
+  grid-row: 2 / 3;
+  font-size: calc(2.2rem + 3vw);
+  margin-left: 8rem;
+  margin-right: 8rem;
+  color: #eee;
+  text-shadow: #222 2px 2px;
+  font-weight: bolder;
+  box-shadow: 0px -4px 4px rgba(10, 10, 10, 0.4);
+}
+
+.hero h2 {
+  background: rgba(255, 255, 255, 0.6);
+  padding: 0.7rem 0.5rem 0.6rem;
+  font-size: 1.2rem;
+  margin: 0 8rem;
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+  align-self: self-start;
+  border-radius: 10%;
+}
+
+.hero a {
+  color: #222;
+  text-decoration: none;
 }
 
 .hero img {
+  /* width: 100%; */
+  /* height: 100%; */
   max-width: 100%;
   min-width: 100%;
+  z-index: -1;
+  grid-column: 1 / -1;
+  grid-row: 1 / 4;
+  object-fit: fill;
+  opacity: 0.85;
+}
+
+.hero p {
+  grid-column: 1 / -1;
+  grid-row: 4 / 5;
+  align-self: center;
+  width: 66%;
+  justify-self: center;
+  font-size: calc(0.75rem + 1vw);
+  line-height: 1.5;
+  margin: 0;
 }
 
 .content {
   grid-column: 2 / 5;
   grid-row-start: 3;
   min-height: 200px;
+  line-height: 1.5em;
+  font-size: 1.3em;
 }
