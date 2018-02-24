@@ -4,6 +4,14 @@
   box-sizing: inherit;
 }
 
+html {
+  font-kerning: normal;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 ol,
 ul {
   margin: 0;
@@ -213,6 +221,27 @@ header {
   font-size: calc(0.75rem + 1vw);
   line-height: 1.5;
   margin: 0;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .hero h1 {
+    font-size: calc(0.5rem + 3vw);
+    margin: 0;
+  }
+
+  .hero h2 {
+    font-size: calc(0.2rem + 3vw);
+    margin: 0;
+    grid-column: 2 / 4;
+  }
+
+  .hero img {
+    width: 100%;
+  }
 }
 
 .content {
