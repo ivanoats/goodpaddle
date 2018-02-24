@@ -37,6 +37,13 @@ body {
   grid-template-rows: repeat(5, 20%);
 }
 
+/* bigger center column on phones */
+@media (max-width: 380px) {
+  .container {
+    grid-template-columns: 2rem repeat(3, 1fr) 2rem;
+  }
+}
+
 header {
   display: flex;
   /* flex-wrap: wrap; */
@@ -111,7 +118,7 @@ header {
     list-style-type: none;
     opacity: 0;
     text-align: center;
-    transition: all 1s ease;
+    transition: all 0.2s ease;
     width: 100%;
     visibility: hidden;
   }
