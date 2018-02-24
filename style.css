@@ -264,9 +264,3 @@ header {
     font-size: 1em;
   }
 }
-
-@media (max-width: 380px) {
-  .content {
-    font-size: 0.75em;
-  }
-}
