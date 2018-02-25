@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Website for GoodPaddle.com",
   "main": "index.js",
-  "private": "true",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,5 +22,19 @@
   "bugs": {
     "url": "https://github.com/ivanoats/goodpaddle/issues"
   },
-  "homepage": "https://github.com/ivanoats/goodpaddle#readme"
+  "homepage": "https://github.com/ivanoats/goodpaddle#readme",
+  "devDependencies": {
+    "eslint": "^4.18.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-prettier-standard": "^1.0.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "prettier": "^1.10.2",
+    "stylelint": "^9.1.1",
+    "stylelint-config-standard": "^18.1.0"
+  }
 }

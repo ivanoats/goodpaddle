@@ -1,6 +1,6 @@
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
@@ -10,6 +10,7 @@ html {
   -moz-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  box-sizing: border-box;
 }
 
 ol,
@@ -18,15 +19,9 @@ ul {
   padding: 0;
 }
 
-html {
-  box-sizing: border-box;
-}
-
 body {
   font-family: "Century Gothic", CenturyGothic, AppleGothic, Helvetica, Arial,
     sans-serif;
-  margin-left: 5vw auto;
-  margin-right: 5vw auto;
   padding: 0;
   margin: 0;
 }
@@ -46,7 +41,6 @@ body {
 
 header {
   display: flex;
-  /* flex-wrap: wrap; */
   justify-content: space-between;
   align-items: flex-end;
   width: 90%;
@@ -149,20 +143,20 @@ header {
     font-size: 1.7em;
     padding: 0;
   }
+
   .logo {
     width: 15%;
   }
+
   .content {
     font-size: 0.6em;
     line-height: 1em;
   }
-  /* .nav-wrapper {display: block;} */
 }
 
 .hero {
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
-  /* grid-gap: 2em; */
   display: grid;
   grid-column: 1 / 6;
   justify-content: center;
@@ -180,7 +174,7 @@ header {
   color: #eee;
   text-shadow: #222 2px 2px;
   font-weight: bolder;
-  box-shadow: 0px -4px 4px rgba(10, 10, 10, 0.4);
+  box-shadow: 0 -4px 4px rgba(10, 10, 10, 0.4);
 }
 
 .hero h2 {
@@ -208,8 +202,6 @@ header {
 }
 
 .hero img {
-  /* width: 100%; */
-  /* height: 100%; */
   max-width: 100%;
   min-width: 100%;
   z-index: -1;
