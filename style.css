@@ -155,16 +155,19 @@ header {
 }
 
 .hero {
+  background-image: url(images/semiahmoo.jpg);
+  background-size: cover;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
   display: grid;
   grid-column: 1 / 6;
   justify-content: center;
-  align-items: center;
+  align-items: safe center;
   text-align: center;
 }
 
 .hero h1 {
+  display: block;
   background: rgba(10, 10, 10, 0.4);
   grid-column: 1 / -1;
   grid-row: 2 / 3;
@@ -183,7 +186,7 @@ header {
   font-size: 1.2rem;
   margin: 0 8rem;
   grid-column: 2 / 3;
-  grid-row: 3 / 4;
+  grid-row: 3;
   align-self: self-start;
   border-radius: 10%;
 }
@@ -211,15 +214,12 @@ header {
   opacity: 0.85;
 }
 
-.hero p {
-  grid-column: 1 / -1;
-  grid-row: 4 / 5;
-  align-self: center;
-  width: 66%;
+.content .subhead {
+  text-align: center;
   justify-self: center;
   font-size: calc(0.75rem + 1vw);
   line-height: 1.5;
-  margin: 0;
+  margin: 5vw;
 }
 
 @media (max-width: 768px) {
@@ -245,7 +245,7 @@ header {
 
 .content {
   grid-column: 2 / 5;
-  grid-row-start: 3;
+  grid-row-start: 2;
   min-height: 200px;
   line-height: 1.5em;
   font-size: 1.3em;
