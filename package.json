@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx live-server --https=/usr/local/lib/node_modules/live-server-https --no-browser"
+    "start": "npx live-server --https=/usr/local/lib/node_modules/live-server-https --no-browser --ignore=.git  "
   },
   "repository": {
     "type": "git",
@@ -28,7 +28,7 @@
     "eslint": "^6.0.1",
     "eslint-config-prettier": "^6.0.0",
     "eslint-config-prettier-standard": "^3.0.1",
-    "eslint-config-standard": "^13.0.0",
+    "eslint-config-standard": "^13.0.1",
     "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-node": "^9.1.0",
     "eslint-plugin-prettier": "^3.1.0",
