@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx live-server --https=/usr/local/lib/node_modules/live-server-https --no-browser --ignore=.git  "
+    "start": "npx live-server --https=/usr/local/lib/node_modules/live-server-https --no-browser --ignore=.git  ",
+    "deploy": "npx scotty  --website --bucket=www.goodpaddle.com --update"
   },
   "repository": {
     "type": "git",
