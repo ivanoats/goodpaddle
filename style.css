@@ -155,16 +155,20 @@ header {
 }
 
 .hero {
+  display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
-  display: grid;
   grid-column: 1 / 6;
+  grid-row: 1 / 3;
+  background-image: url(images/semiahmoo.jpg);
+  background-size: cover;
   justify-content: center;
-  align-items: center;
+  align-items: safe center;
   text-align: center;
 }
 
 .hero h1 {
+  display: block;
   background: rgba(10, 10, 10, 0.4);
   grid-column: 1 / -1;
   grid-row: 2 / 3;
@@ -183,7 +187,7 @@ header {
   font-size: 1.2rem;
   margin: 0 8rem;
   grid-column: 2 / 3;
-  grid-row: 3 / 4;
+  grid-row: 3;
   align-self: self-start;
   border-radius: 10%;
 }
@@ -201,45 +205,24 @@ header {
   color: #eee;
 }
 
-.hero img {
-  max-width: 100%;
-  min-width: 100%;
-  z-index: -1;
-  grid-column: 1 / -1;
-  grid-row: 1 / 4;
-  object-fit: fill;
-  opacity: 0.85;
-}
-
-.hero p {
-  grid-column: 1 / -1;
-  grid-row: 4 / 5;
-  align-self: center;
-  width: 66%;
-  justify-self: center;
-  font-size: calc(0.75rem + 1vw);
-  line-height: 1.5;
-  margin: 0;
-}
-
 @media (max-width: 768px) {
   .hero {
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 
   .hero h1 {
     font-size: calc(0.75rem + 3vw);
     margin: 0;
+    grid-row: 1;
   }
 
   .hero h2 {
     font-size: 0.7rem;
     margin: 0;
     grid-column: 2 / 4;
-  }
-
-  .hero img {
-    width: 100%;
+    grid-row-start: 2;
   }
 }
 
@@ -251,8 +234,17 @@ header {
   font-size: 1.3em;
 }
 
+.content .subhead {
+  text-align: center;
+  justify-self: center;
+  font-size: calc(0.75rem + 1vw);
+  line-height: 1.5;
+  margin: 5vw;
+}
+
 @media (max-width: 768px) {
   .content {
     font-size: 1em;
+    grid-row-start: 2;
   }
 }
