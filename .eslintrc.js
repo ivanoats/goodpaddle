@@ -1,12 +1,12 @@
 module.exports = {
-  extends: ['standard', 'prettier', 'prettier-standard'],
+  extends: ['prettier'],
   env: {
     browser: true,
     es6: true,
     node: true
   },
   parserOptions: {
-    ecmaVersion: 2017,
+    ecmaVersion: 2022,
     sourceType: 'module'
   }
 }

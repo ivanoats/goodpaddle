@@ -5,9 +5,10 @@
   "main": "index.js",
   "private": true,
   "scripts": {
+    "lint": "eslint **/*.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "sysnodestart": "npx live-server --https=/usr/local/lib/node_modules/live-server-https --no-browser --ignore=.git  ",
-    "start": "live-server --https=/Users/ivan/.nvm/versions/node/v16.9.1/lib/node_modules/live-server-https --no-browser --ignore=.git",
+    "start": "live-server --https=/Users/ivan/.nvm/versions/node/v16.14.2/lib/node_modules/live-server-https --no-browser --ignore=.git",
     "deploy": "npx scotty  --website --bucket=www.goodpaddle.com --update"
   },
   "repository": {
@@ -27,18 +28,14 @@
   },
   "homepage": "https://github.com/ivanoats/goodpaddle#readme",
   "devDependencies": {
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-config-prettier-standard": "^4.0.1",
-    "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.24.2",
+    "eslint": "^8.12.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-promise": "^5.1.0",
-    "eslint-plugin-standard": "^5.0.0",
-    "live-server": "^1.1.0",
-    "prettier": "^2.4.1",
-    "stylelint": "^13.13.1",
-    "stylelint-config-standard": "^22.0.0"
+    "eslint-plugin-promise": "^6.0.0",
+    "live-server": "^1.2.1",
+    "prettier": "^2.6.2",
+    "stylelint": "^14.6.1"
   }
 }
