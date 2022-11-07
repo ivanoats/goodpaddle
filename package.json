@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint **/*.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sysnodestart": "npx live-server --https=/usr/local/lib/node_modules/live-server-https --no-browser --ignore=.git  ",
+    "sysnodestart": "npx live-server --https=/opt/homebrew/lib/node_modules/live-server-https --no-browser --ignore=.git  ",
     "start": "live-server --https=$HOME/.nvm/versions/node/v18.9.1/lib/node_modules/live-server-https --no-browser --ignore=.git",
     "deploy": "npx scotty  --website --bucket=www.goodpaddle.com --update"
   },
