@@ -36,6 +36,6 @@
     "eslint-plugin-promise": "^6.1.1",
     "live-server": "^1.2.2",
     "prettier": "^2.7.1",
-    "stylelint": "^15.6.0"
+    "stylelint": "^15.10.1"
   }
 }
