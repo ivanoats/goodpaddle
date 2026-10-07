@@ -1,5 +1,5 @@
 ---
-title: Good Paddle Community
+title: Good Paddle
 description: A community for stand up paddlers, kayakers, outrigger and surfski paddlers, and anyone in a human-powered craft.
 navLabel: Home
 navOrder: 0
@@ -21,6 +21,4 @@ The Good Paddle online community will attempt to bring the SUP vibe, and more Al
 
 ## Share your good paddle
 
-Tag your idea of what makes a good paddle with **#goodpaddle**. Find Good Paddle on [Instagram](https://www.instagram.com/goodpaddle/) and [TikTok](https://www.tiktok.com/@goodpaddle).
-
-Originally published by Ivan Storck as [Good Paddle Community](https://medium.com/goodpaddle/good-paddle-community-1ce23cc2722e) on October 19, 2022.
+Tag your idea of what makes a good paddle with **#goodpaddle**. Find Good Paddle on [Instagram](https://www.instagram.com/goodpaddle/)
