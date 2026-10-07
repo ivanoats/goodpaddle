@@ -74,6 +74,7 @@ test('Markdown publishes pages and posts, excludes drafts, and rejects invalid c
       'utf8',
     );
     assert.match(page, /Shoreline notes/);
+    assert.match(page, /rel="mask-icon"[^>]*href="\/safari-pinned-tab\.svg"/);
     const blog = await readFile(join(fixture, 'dist/blog/index.html'), 'utf8');
     assert.match(blog, /href="\/blog\/first-trip\/"/);
     const post = await readFile(
@@ -102,6 +103,12 @@ test('Markdown publishes pages and posts, excludes drafts, and rejects invalid c
       '---\ndescription: Missing a required title.\n---\n',
     );
     assert.throws(build, /title/);
+    await rm(join(fixture, 'src/content/pages/invalid.md'));
+    await writeFile(
+      join(fixture, 'src/content/pages/invalid-nav-label.md'),
+      '---\ntitle: Invalid navigation label\ndescription: Must fail.\nnavLabel: "   "\n---\n',
+    );
+    assert.throws(build, /navLabel/);
   } finally {
     await rm(fixture, { recursive: true, force: true });
   }

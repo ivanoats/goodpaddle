@@ -78,6 +78,10 @@ jobs:
       - name: Report coverage to DeepSource
         if: vars.DEEPSOURCE_ENABLED == 'true'
         run: |
-          curl --fail --silent --show-error --location https://cli.deepsource.com/install -o /tmp/install-deepsource.sh
-          BINDIR=./bin sh /tmp/install-deepsource.sh
+          set -euo pipefail
+          curl --fail --silent --show-error --location https://github.com/DeepSourceCorp/cli/releases/download/v0.10.1/deepsource_0.10.1_linux_amd64.tar.gz -o /tmp/deepsource.tar.gz
+          echo 'e415a6a53257457ef1dad900fdb39aeb991dd01c35c4be9cafa88a41f9e50b3b  /tmp/deepsource.tar.gz' | sha256sum --check --strict
+          mkdir -p ./bin
+          tar -xzf /tmp/deepsource.tar.gz -C ./bin
+          chmod +x ./bin/deepsource
           ./bin/deepsource report --analyzer test-coverage --key javascript --value-file coverage/lcov.info --use-oidc

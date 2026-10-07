@@ -19,7 +19,7 @@ export const collections = {
         hero: z
           .object({ image: image(), alt: z.string().trim().min(1) })
           .optional(),
-        navLabel: z.string().min(1).optional(),
+        navLabel: z.string().trim().min(1).optional(),
         navOrder: z.number().optional(),
         eyebrow: z.string().optional(),
       }),
