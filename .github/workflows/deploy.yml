@@ -1,0 +1,119 @@
+name: Deploy
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [master]
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Successful master push CI run ID (choose an earlier run to roll back)
+        required: true
+        type: string
+permissions: {}
+concurrency:
+  group: production
+  cancel-in-progress: false
+jobs:
+  validate:
+    permissions:
+      contents: read
+      actions: read
+      checks: read
+    if: vars.DEPLOY_ENABLED == 'true' && (github.event_name == 'workflow_run' || github.ref == 'refs/heads/master')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    outputs:
+      sha: ${{ steps.gate.outputs.sha }}
+      run_id: ${{ steps.gate.outputs.run_id }}
+    steps:
+      - name: Verify release provenance and external quality gates
+        id: gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ inputs.run_id || github.event.workflow_run.id }}
+          SONAR_ENABLED: ${{ vars.SONAR_ENABLED }}
+          DEEPSOURCE_ENABLED: ${{ vars.DEEPSOURCE_ENABLED }}
+          # Exact GitHub check names, copied from a successful trial PR.
+          EXTERNAL_CHECKS: ${{ vars.REQUIRED_EXTERNAL_CHECKS }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+          [[ "$RUN_ID" =~ ^[0-9]+$ ]]
+          [[ "$SONAR_ENABLED" == true && "$DEEPSOURCE_ENABLED" == true ]]
+          [[ -n "$EXTERNAL_CHECKS" ]]
+          run=$(gh api "repos/$REPO/actions/runs/$RUN_ID")
+          jq -e '.conclusion == "success" and .event == "push" and .head_branch == "master" and .path == ".github/workflows/ci.yml"' <<< "$run" > /dev/null
+          sha=$(jq -r '.head_sha' <<< "$run")
+          # Automatic releases must still be the current default-branch head.
+          if [[ "$EVENT_NAME" == workflow_run ]]; then
+            head=$(gh api "repos/$REPO/git/ref/heads/master" --jq '.object.sha')
+            [[ "$sha" == "$head" ]]
+          fi
+          names=$(jq -cn --arg names "$EXTERNAL_CHECKS" '$names | split(",") | map(gsub("^ +| +$"; ""))')
+          for attempt in $(seq 1 30); do
+            checks=$(gh api --paginate "repos/$REPO/commits/$sha/check-runs?per_page=100" --jq '.check_runs[]' | jq -s '.')
+            if jq -e --argjson names "$names" 'group_by(.name) | map(max_by(.id)) as $checks | all($names[]; . as $name | any($checks[]; .name == $name and .conclusion == "success"))' <<< "$checks" > /dev/null; then
+              echo "sha=$sha" >> "$GITHUB_OUTPUT"
+              echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            sleep 15
+          done
+          echo 'Required external checks did not all succeed.' >&2
+          exit 1
+  deploy:
+    needs: validate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: production
+    permissions:
+      contents: read
+      actions: read
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: site-${{ needs.validate.outputs.sha }}
+          path: dist
+          run-id: ${{ needs.validate.outputs.run_id }}
+          github-token: ${{ github.token }}
+      - uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4.3.1
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+      - name: Publish tested static artifact
+        env:
+          BUCKET: ${{ vars.S3_BUCKET }}
+          DISTRIBUTION: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
+        run: |
+          set -euo pipefail
+          test -n "$BUCKET"
+          test -n "$DISTRIBUTION"
+          # Retain old hashed assets so cached pages and rollback stay usable.
+          aws s3 sync dist/ "s3://$BUCKET/" --exclude '*.html' --exclude '_astro/*' --delete --cache-control 'public,max-age=3600'
+          aws s3 sync dist/_astro/ "s3://$BUCKET/_astro/" --cache-control 'public,max-age=31536000,immutable'
+          aws s3 sync dist/ "s3://$BUCKET/" --exclude '*' --include '*.html' --delete --cache-control 'public,max-age=0,must-revalidate'
+          invalidation=$(aws cloudfront create-invalidation --distribution-id "$DISTRIBUTION" --paths '/*' --query 'Invalidation.Id' --output text)
+          aws cloudfront wait invalidation-completed --distribution-id "$DISTRIBUTION" --id "$invalidation"
+      - name: Verify public responses
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: |
+          set -euo pipefail
+          [[ "$SITE_URL" == https://* ]]
+          curl --fail --silent --show-error "$SITE_URL/" -o /tmp/home.html
+          cmp dist/index.html /tmp/home.html
+          deep_page=$(find dist -mindepth 2 -type f -name index.html -print -quit)
+          if [[ -n "$deep_page" ]]; then
+            relative="${deep_page#dist/}"
+            route="${relative%index.html}"
+            curl --fail --silent --show-error "$SITE_URL/$route" -o /tmp/deep-page.html
+            cmp "$deep_page" /tmp/deep-page.html
+          fi
+          curl --fail --silent --show-error "$SITE_URL/verdant-theme-toggle.js" > /dev/null
+          curl --fail --silent --show-error "$SITE_URL/sitemap-index.xml" > /dev/null
+          status=$(curl --silent --show-error -o /tmp/missing.html -w '%{http_code}' "$SITE_URL/__deployment_missing_page__/")
+          [[ "$status" == 404 ]]
+          grep -q 'Back to shore' /tmp/missing.html

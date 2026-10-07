@@ -1,3 +1,13 @@
-tmp
-node_modules
+node_modules/
+dist/
+.astro/
+styled-system/
+coverage/
+playwright-report/
+test-results/
+public/verdant-theme-toggle.js
 .DS_Store
+.env
+.env.*
+!.env.example
+tmp/

@@ -1,0 +1,18 @@
+---
+import Site from '../layouts/Site.astro';
+import * as styles from '../styles/site';
+---
+
+<Site
+  title="Page not found"
+  description="This page could not be found. Return to Good Paddle."
+  noindex
+>
+  <section class={styles.prose}>
+    <p class={styles.eyebrow}>404 · Off course</p>
+    <h1 class={styles.title}>Back to shore.</h1>
+    <p>
+      We couldn’t find that page. <a href="/">Return to Good Paddle</a>.
+    </p>
+  </section>
+</Site>
