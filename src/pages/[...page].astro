@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import Site from '../layouts/Site.astro';
+import HeroCarousel from '../components/HeroCarousel.astro';
 import { pageRoutes } from '../lib/content';
 import * as styles from '../styles/site';
 export async function getStaticPaths() {
@@ -28,18 +29,21 @@ const { Content } = await render(entry);
       <h1 class={styles.title}>{entry.data.title}</h1>
       <p class={styles.intro}>{entry.data.description}</p>
     </div>
-    {entry.data.hero && (
-      <Image
-        class={styles.photo}
-        src={entry.data.hero.image}
-        alt={entry.data.hero.alt}
-        widths={[480, 800, 1200]}
-        sizes="(min-width: 768px) 55vw, 100vw"
-        format="webp"
-        loading="eager"
-        fetchpriority="high"
-      />
-    )}
+    {entry.data.hero &&
+      (entry.id === 'home' ? (
+        <HeroCarousel image={entry.data.hero.image} alt={entry.data.hero.alt} />
+      ) : (
+        <Image
+          class={styles.photo}
+          src={entry.data.hero.image}
+          alt={entry.data.hero.alt}
+          widths={[480, 800, 1200]}
+          sizes="(min-width: 768px) 55vw, 100vw"
+          format="webp"
+          loading="eager"
+          fetchpriority="high"
+        />
+      ))}
   </section>
   <article class={styles.prose}>
     <Content />
