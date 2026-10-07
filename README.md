@@ -39,7 +39,7 @@ Write the body here. The template supplies the page's h1.
 
 Set `draft: false` to publish at `/your-page/`. `home.md` maps to `/`. Omit `navLabel` to publish without adding a navigation link. Use lowercase kebab-case filenames; nested directories become nested routes. Reserved or duplicate published routes fail the build. Optional `hero` frontmatter takes an `image` path relative to the Markdown file and a nonempty `alt` description; see `home.md`. Frontmatter is validated by Astro's content schema.
 
-Posts live in `src/content/posts/` and additionally require `published: YYYY-MM-DD`. Publishing the first post enables `/blog/` and the Blog navigation link. Drafts never produce public routes. About, Contact, and the example post remain drafts pending reviewed content. Homepage replacement copy is provisional and should be reviewed before release.
+Posts live in `src/content/posts/` and additionally require `published: YYYY-MM-DD`. Publishing the first post enables `/blog/` and the Blog navigation link. Drafts never produce public routes. About, Contact, and the example post remain drafts pending reviewed content. Homepage copy comes from Ivan’s “Good Paddle Community” article, linked in the page. The original launch-signup prompt and dated Discord invitation are omitted pending current destinations.
 
 Use ordinary Markdown, not embedded application components. Images need alt text and internal links must resolve. The template owns site navigation, metadata, and appearance controls.
 

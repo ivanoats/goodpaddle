@@ -1,16 +1,26 @@
 ---
-title: What makes a good paddle?
-description: Good Paddle — stand up paddleboarding, time on the water, and the places worth exploring.
+title: Good Paddle Community
+description: A community for stand up paddlers, kayakers, outrigger and surfski paddlers, and anyone in a human-powered craft.
 navLabel: Home
 navOrder: 0
-eyebrow: Stand up paddleboarding
+eyebrow: More aloha on the water
 hero:
   image: ../../assets/semiahmoo.jpg
   alt: A paddleboarder on the water off Semiahmoo
 ---
 
-## A little closer to the water
+## What makes a good paddle?
 
-A paddle, a board, and a different view of the shoreline. Good Paddle is a place for stand up paddleboarding and the simple pleasure of being out on the water.
+One of the best things about the stand up paddling experience is the community. There’s just something about being on the water and standing that makes it easy to say hello to others. There’s plenty of space on the water to spread out and let everyone do their thing. Add to this the fact that it’s a relatively new sport, with lots of new people coming “on board” every year, we all love to learn from each other and share.
 
-From a quiet bay to a familiar stretch of coast, there is always something else to notice.
+## More aloha online
+
+Many of us have noticed that the traditional models of community online have some serious issues and just aren’t fun anymore. Social media platforms monopolized by ruthlessly competitive corporations are spreading more hate than aloha. An even worse problem is that we feel we can’t quit the social network because all of the paddling events and amazing personal adventures are posted there. Feeds are optimized to have us pick up the phone multiple times a day to see if there are any more likes or updates. Sure, SUP is addictive, too, but we want our online presence to be more in line with our values.
+
+The Good Paddle online community will attempt to bring the SUP vibe, and more Aloha, to the online space. It will be a community for all kinds of paddlers: Kayak, Outrigger, Surfski, and any human powered craft that wants to participate.
+
+## Share your good paddle
+
+Tag your idea of what makes a good paddle with **#goodpaddle**. Find Good Paddle on [Instagram](https://www.instagram.com/goodpaddle/) and [TikTok](https://www.tiktok.com/@goodpaddle).
+
+Originally published by Ivan Storck as [Good Paddle Community](https://medium.com/goodpaddle/good-paddle-community-1ce23cc2722e) on October 19, 2022.

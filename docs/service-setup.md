@@ -40,7 +40,7 @@ Before the first production release, exercise the workflow in a staging bucket/d
 
 ## Remaining release checks
 
-- Review the provisional homepage copy. Supply About/Contact copy and the contact destination before enabling those drafts.
+- Homepage copy is sourced from Ivan’s “Good Paddle Community” article. Confirm a current Discord invitation and signup destination before adding those calls to action. Supply About/Contact copy and the contact destination before enabling those drafts.
 - Review desktop/mobile screenshots and perform keyboard, zoom, and screen-reader checks. Automated axe checks are not a full accessibility audit.
 - Confirm host routing, headers, domain redirects, production transfer sizes, and rollback in staging.
 - Review the local CSS/JS budgets (25 KiB/15 KiB Brotli). They are proposed ceilings, not claims about measured production transfers or energy use.
