@@ -1,3 +1,4 @@
+import assert from 'node:assert/strict';
 import { test, expect } from '@playwright/test';
 
 const carousel = 'hero-carousel';
@@ -17,6 +18,7 @@ test('loads only the lead photo initially, then cycles through six unique slides
   await expect(page.locator(carousel)).toHaveAttribute('data-ready', 'true');
   const image = page.locator(`${carousel} img`);
   const lead = await image.getAttribute('src');
+  assert.ok(lead, 'The lead photo must have a source URL');
   expect(imageRequests).toHaveLength(1);
   const seen = [lead];
   for (let i = 2; i <= 6; i++) {
@@ -26,16 +28,18 @@ test('loads only the lead photo initially, then cycles through six unique slides
     expect(
       await image.evaluate((img: HTMLImageElement) => img.naturalWidth),
     ).toBeGreaterThan(0);
-    seen.push(await image.getAttribute('src'));
+    const source = await image.getAttribute('src');
+    assert.ok(source, 'Each selected photo must have a source URL');
+    seen.push(source);
   }
   expect(new Set(seen).size).toBe(6);
   await page.getByRole('button', { name: 'Next photo' }).click();
-  await expect(image).toHaveAttribute('src', lead!);
+  await expect(image).toHaveAttribute('src', lead);
   await expect(page.locator('[data-counter]')).toHaveText('1 / 6');
   await page.getByRole('button', { name: 'Previous photo' }).click();
   await expect(page.locator('[data-counter]')).toHaveText('6 / 6');
   await page.reload();
-  await expect(image).toHaveAttribute('src', lead!);
+  await expect(image).toHaveAttribute('src', lead);
   await expect(page.locator('[data-counter]')).toHaveText('1 / 6');
 });
 
@@ -63,7 +67,8 @@ test('horizontal drag navigates, taps and vertical gestures do not', async ({
   await expect(page.locator(carousel)).toHaveAttribute('data-ready', 'true');
   const image = page.locator(`${carousel} img`);
   await image.scrollIntoViewIfNeeded();
-  const box = (await image.boundingBox())!;
+  const box = await image.boundingBox();
+  assert.ok(box, 'The carousel photo must have a visible bounding box');
   const gesture = async (dx: number, dy: number) => {
     await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
     await page.mouse.down();
@@ -107,10 +112,11 @@ test('a failed photo keeps the previous image and allows another attempt', async
   await page.goto('/');
   const image = page.locator(`${carousel} img`);
   const lead = await image.getAttribute('src');
+  assert.ok(lead, 'The lead photo must have a source URL');
   await page.route('**/_astro/*.webp', (route) => route.abort());
   await page.getByRole('button', { name: 'Next photo' }).click();
   await expect(page.getByRole('status')).toContainText('could not load');
-  await expect(image).toHaveAttribute('src', lead!);
+  await expect(image).toHaveAttribute('src', lead);
   await expect(page.locator('[data-counter]')).toHaveText('1 / 6');
   await page.unroute('**/_astro/*.webp');
   await page.getByRole('button', { name: 'Next photo' }).click();
@@ -142,6 +148,7 @@ test('touchscreen swipe changes photos and vertical touch still scrolls', async 
   browser,
   browserName,
 }) => {
+  // Firefox and WebKit do not expose the CDP touch injection used by this test.
   test.skip(
     browserName !== 'chromium',
     'Native touch injection uses Chromium DevTools.',
@@ -155,7 +162,8 @@ test('touchscreen swipe changes photos and vertical touch still scrolls', async 
   await page.goto('http://127.0.0.1:4321/');
   await expect(page.locator(carousel)).toHaveAttribute('data-ready', 'true');
   const client = await context.newCDPSession(page);
-  const box = (await page.locator(`${carousel} img`).boundingBox())!;
+  const box = await page.locator(`${carousel} img`).boundingBox();
+  assert.ok(box, 'The carousel photo must have a visible bounding box');
   const x = Math.round(box.x + box.width / 2);
   const y = Math.round(box.y + box.height / 2);
   const touch = async (dx: number, dy: number) => {
@@ -182,4 +190,29 @@ test('touchscreen swipe changes photos and vertical touch still scrolls', async 
     .toBeGreaterThan(0);
   await expect(page.locator('[data-counter]')).toHaveText('2 / 6');
   await context.close();
+});
+
+test('incomplete carousel markup keeps the static photo without enabling controls', async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.goto('/');
+  await expect(page.locator(carousel)).toHaveAttribute('data-ready', 'true');
+  await page.evaluate(() => {
+    const original = document.querySelector('hero-carousel');
+    if (!original) throw new Error('Expected the homepage carousel');
+    const clone = original.cloneNode(true) as HTMLElement;
+    delete clone.dataset.ready;
+    clone.id = 'incomplete-carousel';
+    const controls = clone.querySelector<HTMLElement>('[data-controls]');
+    if (controls) controls.hidden = true;
+    clone.querySelector('[data-next]')?.remove();
+    document.querySelector('main')?.append(clone);
+  });
+  const fallback = page.locator('#incomplete-carousel');
+  await expect(fallback.locator('img')).toBeVisible();
+  await expect(fallback).not.toHaveAttribute('data-ready');
+  await expect(fallback.locator('[data-controls]')).toBeHidden();
+  expect(errors).toEqual([]);
 });

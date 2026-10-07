@@ -7,16 +7,27 @@ interface Slide {
 
 class HeroCarousel extends HTMLElement {
   connectedCallback() {
-    if (this.dataset.ready) return;
-    const pool: Slide[] = JSON.parse(this.dataset.slides!);
+    if (this.dataset.ready || !this.dataset.slides) return;
+    const pool: Slide[] = JSON.parse(this.dataset.slides);
     const slides = selectSlides(pool[0], pool.slice(1));
-    const image = this.querySelector('img')!;
-    const slide = this.querySelector<HTMLElement>('[data-slide]')!;
-    const controls = this.querySelector<HTMLElement>('[data-controls]')!;
-    const counter = this.querySelector<HTMLElement>('[data-counter]')!;
-    const announcement = this.querySelector<HTMLElement>(
-      '[data-announcement]',
-    )!;
+    const image = this.querySelector('img');
+    const slide = this.querySelector<HTMLElement>('[data-slide]');
+    const controls = this.querySelector<HTMLElement>('[data-controls]');
+    const counter = this.querySelector<HTMLElement>('[data-counter]');
+    const announcement = this.querySelector<HTMLElement>('[data-announcement]');
+    const previous = this.querySelector('[data-previous]');
+    const nextButton = this.querySelector('[data-next]');
+    if (
+      !image ||
+      !slide ||
+      !controls ||
+      !counter ||
+      !announcement ||
+      !previous ||
+      !nextButton ||
+      !pool.length
+    )
+      return;
     let index = 0;
     let request = 0;
     const updatePosition = () => {
@@ -51,18 +62,16 @@ class HeroCarousel extends HTMLElement {
       updatePosition();
       announcement.textContent = `Photo ${index + 1} of ${slides.length}: ${target.alt}`;
     };
-    this.querySelector('[data-previous]')!.addEventListener(
-      'click',
-      () => void navigate(-1),
-    );
-    this.querySelector('[data-next]')!.addEventListener(
-      'click',
-      () => void navigate(1),
-    );
-    controls.addEventListener('keydown', (event) => {
+    previous.addEventListener('click', async () => {
+      await navigate(-1);
+    });
+    nextButton.addEventListener('click', async () => {
+      await navigate(1);
+    });
+    controls.addEventListener('keydown', async (event) => {
       if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
         event.preventDefault();
-        void navigate(event.key === 'ArrowLeft' ? -1 : 1);
+        await navigate(event.key === 'ArrowLeft' ? -1 : 1);
       }
     });
     let start: { x: number; y: number; id: number } | undefined;
@@ -71,14 +80,14 @@ class HeroCarousel extends HTMLElement {
       start = { x: event.clientX, y: event.clientY, id: event.pointerId };
       slide.setPointerCapture(event.pointerId);
     });
-    slide.addEventListener('pointerup', (event) => {
-      if (!start || start.id !== event.pointerId) return;
+    slide.addEventListener('pointerup', async (event) => {
+      if (start?.id !== event.pointerId) return;
       const direction = swipeDirection(
         event.clientX - start.x,
         event.clientY - start.y,
       );
       start = undefined;
-      if (direction) void navigate(direction);
+      if (direction) await navigate(direction);
     });
     slide.addEventListener('pointercancel', () => {
       start = undefined;
