@@ -19,6 +19,12 @@ npm run preview
 
 Astro writes deployable files to `dist/`. Panda extracts styles from literal calls in `src/styles/site.ts`; Verdant supplies the semantic tokens and theme runtime. Generated styles and the copied theme runtime are gitignored. Original public image URLs remain available; the homepage uses optimized WebP variants.
 
+## Hero carousel
+
+The homepage keeps the Markdown hero as its first photo and selects five different photos from the gallery on each page load. Navigation uses buttons, keyboard arrows while a control is focused, or horizontal swipes. There is no autoplay or animation. Only viewed photos download; without JavaScript the lead photo remains visible.
+
+Original gallery photos live in `src/assets/fullsize/`. Run `npm run images:optimize` to regenerate the 1200 × 900 WebP crops in `src/assets/optimized/`. Source filenames, output names, alt text, and normalized crop centers are in `src/assets/carousel-photos.json`. Adjust a photo's `focus` coordinates (0–1 across and down) to move its crop. The script preserves originals and removes metadata from the outputs. Astro generates 480, 800, and 1200 pixel responsive variants during the build. Commit the optimized images so deployment does not need to regenerate crops.
+
 ## Writing pages
 
 Add `src/content/pages/your-page.md`:
@@ -52,7 +58,7 @@ npm run verify
 
 Verification runs ESLint, Prettier, Astro type checking, Vitest coverage, a production build, isolated Markdown publishing/error fixtures, generated HTML/link/asset-budget checks, and Playwright/axe tests. `CROSS_BROWSER=1 npm run test:browser` also runs Firefox and WebKit after installing their browsers. CI runs all browsers on default-branch pushes before release and weekly.
 
-Coverage requires **80% lines, statements, functions, and branches** in `src/lib/**/*.ts`, which currently contains all custom executable application behavior. Include new application logic in that scope (or expand the include pattern). Content schemas, literal style declarations, Astro templates, infrastructure scripts, generated code, and Verdant's third-party runtime are outside the percentage. Rendered output and theme behavior are checked separately. LCOV is written to `coverage/lcov.info`.
+Coverage requires **80% lines, statements, functions, and branches** in `src/lib/**/*.ts`, which contains content helpers and carousel selection/gesture logic. Include new application logic in that scope (or expand the include pattern). Content schemas, literal style declarations, Astro templates, infrastructure scripts, generated code, and Verdant's third-party runtime are outside the percentage. Rendered output, the carousel DOM controller in `src/scripts/`, image loading, gestures, and theme behavior are checked separately in browser tests. LCOV is written to `coverage/lcov.info`.
 
 Local commands: `npm test`, `npm run test:coverage`, `npm run check`, `npm run check:site`, `npm run test:browser`, and `npm run format`.
 

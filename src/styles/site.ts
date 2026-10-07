@@ -118,3 +118,51 @@ export const theme = css({
 });
 
 export const pageHeader = css({ py: '12' });
+
+export const carousel = css({ display: 'block', minWidth: '0' });
+export const carouselPhoto = css({
+  display: 'block',
+  width: '100%',
+  height: 'auto',
+  aspectRatio: '4 / 3',
+  objectFit: 'cover',
+  borderRadius: 'lg',
+  touchAction: 'pan-y pinch-zoom',
+  userSelect: 'none',
+});
+export const carouselControls = css({
+  minHeight: '60px',
+  pt: '3',
+  '& > div:not([hidden])': {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    gap: '4',
+  },
+  '& button': {
+    width: '44px',
+    height: '44px',
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: '1px',
+    borderColor: 'border',
+    borderRadius: 'full',
+    background: 'surface.100',
+    color: 'ink',
+    fontSize: 'displaySm',
+    cursor: 'pointer',
+    _hover: { background: 'surface.200' },
+    _focusVisible: {
+      outline: '2px solid',
+      outlineColor: 'accent',
+      outlineOffset: '3px',
+    },
+  },
+  '& [data-counter]': {
+    color: 'ink.muted',
+    fontSize: 'bodySm',
+    fontVariantNumeric: 'tabular-nums',
+  },
+});
+export const srOnly = css({ srOnly: true });

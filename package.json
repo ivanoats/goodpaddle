@@ -18,7 +18,8 @@
     "test:browser": "playwright test",
     "check:site": "node scripts/check-site.mjs",
     "verify": "npm run lint && npm run format:check && npm run check && npm run test:coverage && npm run build && npm run test:content && npm run check:site && npm run test:browser",
-    "test:content": "node --test tests/integration/*.test.mjs"
+    "test:content": "node --test tests/integration/*.test.mjs",
+    "images:optimize": "node scripts/optimize-carousel.mjs"
   },
   "repository": {
     "type": "git",
@@ -53,6 +54,7 @@
     "globals": "17.13.0",
     "prettier": "3.9.9",
     "prettier-plugin-astro": "1.1.0",
+    "sharp": "0.35.5",
     "typescript": "6.0.3",
     "typescript-eslint": "8.71.1",
     "vitest": "5.0.3"
