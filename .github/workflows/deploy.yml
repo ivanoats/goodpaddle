@@ -10,16 +10,16 @@ on:
         description: Successful master push CI run ID (choose an earlier run to roll back)
         required: true
         type: string
-permissions:
-  contents: read
-  actions: read
-  checks: read
-  statuses: read
+permissions: {}
 concurrency:
   group: production
   cancel-in-progress: false
 jobs:
   validate:
+    permissions:
+      contents: read
+      actions: read
+      checks: read
     if: vars.DEPLOY_ENABLED == 'true' && (github.event_name == 'workflow_run' || github.ref == 'refs/heads/master')
     runs-on: ubuntu-24.04
     timeout-minutes: 12

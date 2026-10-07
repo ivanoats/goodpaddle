@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFile, readdir, stat } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import { resolve, relative, join } from 'node:path';
 import { brotliCompressSync } from 'node:zlib';
 import { load } from 'cheerio';
@@ -55,8 +55,8 @@ for (const [file, $] of documents) {
       target.startsWith(`${root}/`) || target === root,
       'Path must stay within dist',
     );
-    if ((await stat(target).catch(() => null))?.isDirectory())
-      target = join(target, 'index.html');
+    const directoryIndex = join(target, 'index.html');
+    if (files.includes(directoryIndex)) target = directoryIndex;
     assert(
       files.includes(target),
       `${label}: missing local asset or page ${href}`,

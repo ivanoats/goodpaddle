@@ -6,13 +6,14 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '23 9 * * 1'
-permissions:
-  contents: read
+permissions: {}
 concurrency:
   group: ci-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   verify:
+    permissions:
+      contents: read
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
@@ -24,10 +25,10 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
-      - run: npm ci
-      - run: npx playwright install --with-deps chromium
+      - run: npm ci --ignore-scripts
+      - run: ./node_modules/.bin/playwright install --with-deps chromium
         if: env.CROSS_BROWSER != '1'
-      - run: npx playwright install --with-deps chromium firefox webkit
+      - run: ./node_modules/.bin/playwright install --with-deps chromium firefox webkit
         if: env.CROSS_BROWSER == '1'
       - run: npm run verify
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -63,7 +64,7 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
-      - run: npm ci
+      - run: npm ci --ignore-scripts
       - run: npm run test:coverage
       - name: SonarQube analysis and quality gate
         if: vars.SONAR_ENABLED == 'true'
@@ -79,7 +80,7 @@ jobs:
         if: vars.DEEPSOURCE_ENABLED == 'true'
         run: |
           set -euo pipefail
-          curl --fail --silent --show-error --location https://github.com/DeepSourceCorp/cli/releases/download/v0.10.1/deepsource_0.10.1_linux_amd64.tar.gz -o /tmp/deepsource.tar.gz
+          curl --proto '=https' --proto-redir '=https' --fail --silent --show-error --location https://github.com/DeepSourceCorp/cli/releases/download/v0.10.1/deepsource_0.10.1_linux_amd64.tar.gz -o /tmp/deepsource.tar.gz
           echo 'e415a6a53257457ef1dad900fdb39aeb991dd01c35c4be9cafa88a41f9e50b3b  /tmp/deepsource.tar.gz' | sha256sum --check --strict
           mkdir -p ./bin
           tar -xzf /tmp/deepsource.tar.gz -C ./bin
