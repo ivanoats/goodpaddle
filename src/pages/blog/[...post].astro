@@ -1,0 +1,57 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { publishedPosts } from '../../lib/content';
+import Site from '../../layouts/Site.astro';
+import * as styles from '../../styles/site';
+export async function getStaticPaths() {
+  const posts = publishedPosts(await getCollection('posts'));
+  return posts.length
+    ? [
+        { params: { post: undefined }, props: { posts } },
+        ...posts.map(({ entry, path }) => ({
+          params: { post: path.slice('/blog/'.length, -1) },
+          props: { posts, entry },
+        })),
+      ]
+    : [];
+}
+interface Props {
+  posts: ReturnType<typeof publishedPosts<CollectionEntry<'posts'>>>;
+  entry?: CollectionEntry<'posts'>;
+}
+const { posts, entry } = Astro.props;
+const rendered = entry ? await render(entry) : undefined;
+const Content = rendered?.Content;
+---
+
+<Site
+  title={entry?.data.title ?? 'Notes from the water'}
+  description={
+    entry?.data.description ?? 'Paddleboarding stories from Good Paddle.'
+  }
+>
+  <article class={styles.prose}>
+    <h1 class={styles.title}>{entry?.data.title ?? 'Notes from the water'}</h1>
+    {entry && (
+      <time datetime={entry.data.published.toISOString()}>
+        {entry.data.published.toLocaleDateString('en-US', {
+          dateStyle: 'long',
+          timeZone: 'UTC',
+        })}
+      </time>
+    )}
+    {Content ? (
+      <Content />
+    ) : (
+      <ul>
+        {posts.map(({ entry: post, path }) => (
+          <li>
+            <a href={path}>{post.data.title}</a>
+            <p>{post.data.description}</p>
+          </li>
+        ))}
+      </ul>
+    )}
+  </article>
+</Site>

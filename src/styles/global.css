@@ -1,0 +1,28 @@
+@layer reset, base, tokens, recipes, utilities;
+@layer base {
+  html {
+    scroll-behavior: auto;
+  }
+  body {
+    min-width: 0;
+  }
+  main:focus {
+    outline: none;
+  }
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -8rem;
+    padding: 1rem;
+    z-index: 10;
+    background: var(--colors-surface-200);
+    color: var(--colors-ink);
+  }
+  .skip-link:focus {
+    top: 1rem;
+  }
+  [aria-current='page'] {
+    font-weight: 700;
+    text-underline-offset: 0.3em;
+  }
+}

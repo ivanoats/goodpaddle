@@ -2,14 +2,22 @@
   "name": "goodpaddle",
   "version": "0.0.1",
   "description": "Website for GoodPaddle.com",
-  "main": "index.js",
   "private": true,
   "scripts": {
-    "lint": "eslint **/*.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "sysnodestart": "npx live-server --https=/opt/homebrew/lib/node_modules/live-server-https --no-browser --ignore=.git  ",
-    "start": "live-server --https=$HOME/.nvm/versions/node/v18.9.1/lib/node_modules/live-server-https --no-browser --ignore=.git",
-    "deploy": "npx scottyjs  --website --bucket=www.goodpaddle.com --update"
+    "dev": "npm run prepare:styles && astro dev",
+    "start": "npm run dev",
+    "prepare:styles": "panda codegen && node scripts/copy-theme.mjs",
+    "build": "npm run prepare:styles && astro build",
+    "preview": "astro preview",
+    "check": "npm run prepare:styles && astro check",
+    "lint": "eslint .",
+    "format:check": "prettier --check .",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:browser": "playwright test",
+    "check:site": "node scripts/check-site.mjs",
+    "verify": "npm run lint && npm run format:check && npm run check && npm run test:coverage && npm run build && npm run check:site && npm run test:browser"
   },
   "repository": {
     "type": "git",
@@ -28,14 +36,28 @@
   },
   "homepage": "https://github.com/ivanoats/goodpaddle#readme",
   "devDependencies": {
-    "eslint": "^8.27.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-promise": "^6.1.1",
-    "live-server": "^1.2.2",
-    "prettier": "^2.7.1",
-    "stylelint": "^15.6.0"
+    "@astrojs/check": "0.9.10",
+    "@astrojs/sitemap": "3.7.4",
+    "@axe-core/playwright": "4.13.0",
+    "@eslint/js": "10.0.1",
+    "@pandacss/dev": "2.1.2",
+    "@pandacss/preset-base": "2.1.2",
+    "@pandacss/preset-panda": "2.1.2",
+    "@playwright/test": "1.63.0",
+    "@sustainablewebsites/verdant-design": "0.1.1",
+    "@vitest/coverage-v8": "5.0.3",
+    "astro": "7.3.6",
+    "cheerio": "1.2.0",
+    "eslint": "10.12.0",
+    "globals": "17.13.0",
+    "prettier": "3.9.9",
+    "prettier-plugin-astro": "1.1.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.1",
+    "vitest": "5.0.3"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=24 <27"
   }
 }
