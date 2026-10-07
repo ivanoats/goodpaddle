@@ -4,6 +4,9 @@ description: Good Paddle — stand up paddleboarding, time on the water, and the
 navLabel: Home
 navOrder: 0
 eyebrow: Stand up paddleboarding
+hero:
+  image: ../../assets/semiahmoo.jpg
+  alt: A paddleboarder on the water off Semiahmoo
 ---
 
 ## A little closer to the water

@@ -1,6 +1,6 @@
 # Good Paddle modernization plan
 
-Status: proposed implementation plan, October 6, 2026. No application migration, service activation, or deployment has been performed.
+Status: local implementation prepared, October 6, 2026. Astro/Markdown/Verdant, tests, CI, and opt-in integration/deployment workflows are implemented. Hosted service activation, branch protection, cloud validation, content approval, and release remain pending. See `service-setup.md` for the activation checklist.
 
 ## Current state
 

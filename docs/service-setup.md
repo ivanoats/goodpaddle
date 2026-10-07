@@ -30,7 +30,7 @@ Configure these variables: `AWS_DEPLOY_ROLE_ARN`, `AWS_REGION`, `S3_BUCKET`, `CL
 
 A successful push CI run on `master` uploads `site-<commit SHA>` for 30 days. The Deploy workflow verifies the run belongs to the CI workflow, was a successful default-branch push, and is still current for an automatic release. It waits up to roughly 7.5 minutes for the configured external check-runs to succeed before proceeding to the protected production environment.
 
-After approval, it downloads that exact artifact, obtains short-lived AWS credentials, uploads assets before HTML, removes obsolete HTML routes, and invalidates CloudFront. Old hashed assets remain so cached pages and previous releases work. Smoke checks verify the homepage, theme script, sitemap, and a real 404 response. A deployment failure is visible as a failed workflow; it does not automatically rebuild or roll back.
+After approval, it downloads that exact artifact, obtains short-lived AWS credentials, uploads assets before HTML, removes obsolete HTML routes, and invalidates CloudFront. Old hashed assets remain so cached pages and previous releases work. Default-branch CI tests Chromium, Firefox, and WebKit before release. Smoke checks verify the homepage, theme script, sitemap, a published deep route when one exists, and a real 404 response. A deployment failure is visible as a failed workflow; it does not automatically rebuild or roll back.
 
 ## Rollback
 

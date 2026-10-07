@@ -5,7 +5,6 @@ import { Image } from 'astro:assets';
 import Site from '../layouts/Site.astro';
 import { pageRoutes } from '../lib/content';
 import * as styles from '../styles/site';
-import water from '../assets/semiahmoo.jpg';
 export async function getStaticPaths() {
   const routes = pageRoutes(await getCollection('pages'));
   if (!routes.some(({ path }) => path === '/'))
@@ -23,17 +22,17 @@ const { Content } = await render(entry);
 ---
 
 <Site title={entry.data.title} description={entry.data.description}>
-  <section class={styles.hero}>
+  <section class={entry.data.hero ? styles.hero : styles.pageHeader}>
     <div>
       {entry.data.eyebrow && <p class={styles.eyebrow}>{entry.data.eyebrow}</p>}
       <h1 class={styles.title}>{entry.data.title}</h1>
       <p class={styles.intro}>{entry.data.description}</p>
     </div>
-    {entry.id === 'home' && (
+    {entry.data.hero && (
       <Image
         class={styles.photo}
-        src={water}
-        alt="The shoreline and open water at Semiahmoo"
+        src={entry.data.hero.image}
+        alt={entry.data.hero.alt}
         widths={[480, 800, 1200]}
         sizes="(min-width: 768px) 55vw, 100vw"
         format="webp"

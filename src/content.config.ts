@@ -13,12 +13,16 @@ export const collections = {
       generateId: ({ entry }) => entry.replace(/\.md$/, ''),
       base: './src/content/pages',
     }),
-    schema: z.object({
-      ...shared,
-      navLabel: z.string().min(1).optional(),
-      navOrder: z.number().optional(),
-      eyebrow: z.string().optional(),
-    }),
+    schema: ({ image }) =>
+      z.object({
+        ...shared,
+        hero: z
+          .object({ image: image(), alt: z.string().trim().min(1) })
+          .optional(),
+        navLabel: z.string().min(1).optional(),
+        navOrder: z.number().optional(),
+        eyebrow: z.string().optional(),
+      }),
   }),
   posts: defineCollection({
     loader: glob({

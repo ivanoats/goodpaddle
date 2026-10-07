@@ -104,7 +104,14 @@ jobs:
           set -euo pipefail
           [[ "$SITE_URL" == https://* ]]
           curl --fail --silent --show-error "$SITE_URL/" -o /tmp/home.html
-          grep -q 'Good Paddle' /tmp/home.html
+          cmp dist/index.html /tmp/home.html
+          deep_page=$(find dist -mindepth 2 -type f -name index.html -print -quit)
+          if [[ -n "$deep_page" ]]; then
+            relative="${deep_page#dist/}"
+            route="${relative%index.html}"
+            curl --fail --silent --show-error "$SITE_URL/$route" -o /tmp/deep-page.html
+            cmp "$deep_page" /tmp/deep-page.html
+          fi
           curl --fail --silent --show-error "$SITE_URL/verdant-theme-toggle.js" > /dev/null
           curl --fail --silent --show-error "$SITE_URL/sitemap-index.xml" > /dev/null
           status=$(curl --silent --show-error -o /tmp/missing.html -w '%{http_code}' "$SITE_URL/__deployment_missing_page__/")

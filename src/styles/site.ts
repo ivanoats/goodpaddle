@@ -116,3 +116,5 @@ export const theme = css({
     cursor: 'pointer',
   },
 });
+
+export const pageHeader = css({ py: '12' });

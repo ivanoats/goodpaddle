@@ -37,7 +37,7 @@ draft: true
 Write the body here. The template supplies the page's h1.
 ```
 
-Set `draft: false` to publish at `/your-page/`. `home.md` maps to `/`. Omit `navLabel` to publish without adding a navigation link. Use lowercase kebab-case filenames; nested directories become nested routes. Reserved or duplicate published routes fail the build. Frontmatter is validated by Astro's content schema.
+Set `draft: false` to publish at `/your-page/`. `home.md` maps to `/`. Omit `navLabel` to publish without adding a navigation link. Use lowercase kebab-case filenames; nested directories become nested routes. Reserved or duplicate published routes fail the build. Optional `hero` frontmatter takes an `image` path relative to the Markdown file and a nonempty `alt` description; see `home.md`. Frontmatter is validated by Astro's content schema.
 
 Posts live in `src/content/posts/` and additionally require `published: YYYY-MM-DD`. Publishing the first post enables `/blog/` and the Blog navigation link. Drafts never produce public routes. About, Contact, and the example post remain drafts pending reviewed content. Homepage replacement copy is provisional and should be reviewed before release.
 
@@ -50,7 +50,7 @@ npx playwright install chromium
 npm run verify
 ```
 
-Verification runs ESLint, Prettier, Astro type checking, Vitest coverage, a production build, generated HTML/link/asset-budget checks, and Playwright/axe tests. `CROSS_BROWSER=1 npm run test:browser` also runs Firefox and WebKit after installing their browsers. CI runs all browsers weekly.
+Verification runs ESLint, Prettier, Astro type checking, Vitest coverage, a production build, isolated Markdown publishing/error fixtures, generated HTML/link/asset-budget checks, and Playwright/axe tests. `CROSS_BROWSER=1 npm run test:browser` also runs Firefox and WebKit after installing their browsers. CI runs all browsers on default-branch pushes before release and weekly.
 
 Coverage requires **80% lines, statements, functions, and branches** in `src/lib/**/*.ts`, which currently contains all custom executable application behavior. Include new application logic in that scope (or expand the include pattern). Content schemas, literal style declarations, Astro templates, infrastructure scripts, generated code, and Verdant's third-party runtime are outside the percentage. Rendered output and theme behavior are checked separately. LCOV is written to `coverage/lcov.info`.
 
