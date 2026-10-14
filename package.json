@@ -43,7 +43,7 @@
     "@axe-core/playwright": "4.13.0",
     "@eslint/js": "10.0.1",
     "@pandacss/dev": "2.1.2",
-    "@pandacss/preset-base": "2.1.2",
+    "@pandacss/preset-base": "2.2.0",
     "@pandacss/preset-panda": "2.1.2",
     "@playwright/test": "1.63.0",
     "@sustainablewebsites/verdant-design": "0.1.1",
