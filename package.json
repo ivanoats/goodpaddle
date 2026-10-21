@@ -47,7 +47,7 @@
     "@pandacss/preset-panda": "2.1.2",
     "@playwright/test": "1.63.0",
     "@sustainablewebsites/verdant-design": "0.1.1",
-    "@vitest/coverage-v8": "5.0.3",
+    "@vitest/coverage-v8": "5.0.5",
     "astro": "7.3.8",
     "cheerio": "1.2.0",
     "eslint": "10.12.0",
