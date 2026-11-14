@@ -48,7 +48,7 @@
     "@playwright/test": "1.63.0",
     "@sustainablewebsites/verdant-design": "0.1.1",
     "@vitest/coverage-v8": "5.1.0",
-    "astro": "7.3.8",
+    "astro": "7.4.7",
     "cheerio": "1.2.0",
     "eslint": "10.13.0",
     "globals": "17.13.0",
