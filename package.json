@@ -39,7 +39,7 @@
   "homepage": "https://github.com/ivanoats/goodpaddle#readme",
   "devDependencies": {
     "@astrojs/check": "0.9.10",
-    "@astrojs/sitemap": "3.7.4",
+    "@astrojs/sitemap": "3.7.6",
     "@axe-core/playwright": "4.13.0",
     "@eslint/js": "10.0.1",
     "@pandacss/dev": "2.5.0",
