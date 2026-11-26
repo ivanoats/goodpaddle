@@ -48,6 +48,7 @@ After the manual path and editorial ownership are approved, separately authorize
 
 - **Van Douglas’s annual race calendar.** Ivan identified this regional calendar in the Hood River Outrigger Facebook group. Locate the edition for the season under review. For each promising race, follow up with the organizer to verify that edition’s date, SUP eligibility and applicable courses. Match it against existing occurrences before proposing an addition. [Facebook post supplied by Ivan](https://m.facebook.com/groups/HoodRiverOutrigger/permalink/4005289336272193/)
 - **Sound Rowers.** The November 25 watch report lists the club among its sources. Use the season schedule to find races, then check each event’s entry details for SUP participation. [Sound Rowers race schedule](https://www.soundrowers.org/race-schedule/)
+- **Ocean Flight.** Use its regional schedule to find leads, including Sound Rowers and PNWORCA races. Match by edition and round across calendars, then confirm SUP eligibility and course distances with the organizer. [Ocean Flight PNW Race Schedule](https://oceanflight.com/pages/race-schedule)
 
 ## After the first release
 
