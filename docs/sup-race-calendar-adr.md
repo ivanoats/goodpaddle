@@ -1,4 +1,4 @@
-# ADR 0001 — Publish a reviewed Seattle-area SUP race calendar
+# ADR 0001 — Publish a reviewed Pacific Northwest SUP race calendar
 
 **Status** Proposed for review, November 25, 2026. Implementation starts after Ivan accepts the decision. See the [implementation plan](sup-race-calendar-plan.md).
 
@@ -9,6 +9,8 @@ Seattle SUP Race Watch reports newly discovered races and series around greater 
 The site already builds static Astro pages from validated collections, shares a Verdant/Panda theme, and checks the generated site in CI. The existing Markdown page router owns most paths. The calendar needs its own reserved path and a way to keep the history of an occurrence through changes.
 
 ## Decision
+
+Launch coverage includes greater Seattle and Puget Sound, Bellingham, WA, Vancouver, BC, and Portland, OR. Apply the same SUP eligibility and source checks throughout this area.
 
 Add a build-time Astro collection with one JSON file per race occurrence in `src/content/races/`. A weekend event can have multiple SUP divisions and courses in one record. Give independently scheduled series rounds separate records with a shared series ID. Render approved records into static HTML at `/races/`. Keep discovery notes outside the published collection.
 
@@ -33,7 +35,7 @@ A future, separately authorized handoff from the existing daily watch may propos
 
 Show dated upcoming races in start-date order with an ID tie-breaker. Show cancellations prominently against their announced dates and suppress registration calls to action. Keep a postponed event with no replacement date in a separate status section, with its former date clearly labeled and entry actions suppressed. When a verified replacement arrives, restore scheduled status on the same ID. If a correction makes a race ineligible, withdraw it from public output and retain its ID and history in git.
 
-Use one Pacific calendar date for the whole build. An occurrence remains current through its inclusive final local date, then moves to a past section in reverse chronological order at the next build. This policy assumes the launch region uses Pacific time. Past records retain their anchors, sources and status, with entry actions suppressed. An undated postponement needs editorial follow-up to resolve or retire it. Display the build's “Calendar as of” date and the last verification date on each listing. A static page can retain yesterday's grouping until a new build is released.
+Use one build timestamp and derive the current calendar date in each event’s IANA time zone. An occurrence remains current through its inclusive final local date, then moves to a past section in reverse chronological order at the next build. Past records retain their anchors, sources and status, with entry actions suppressed. An undated postponement needs editorial follow-up to resolve or retire it. Display the build's “Calendar as of” date and the last verification date on each listing. A static page can retain yesterday's grouping until a new build is released.
 
 ### Reader experience
 
@@ -50,4 +52,4 @@ Use the existing site layout, skip link, navigation, theme and Verdant semantic 
 
 ## Non-goals and review decisions
 
-The first release covers race discovery through a readable regional listing. Individual event pages, maps, filters, reminders, ICS/RSS, submissions, results, payments and a new crawler are outside scope. This proposal adds no runtime service. Before release, settle the geographic boundary, ownership of time-sensitive corrections and the refresh policy described in the [plan](sup-race-calendar-plan.md#outstanding-questions).
+The first release covers race discovery through a readable regional listing. Individual event pages, maps, filters, reminders, ICS/RSS, submissions, results, payments and a new crawler are outside scope. This proposal adds no runtime service. Before release, settle ownership of time-sensitive corrections and the refresh policy described in the [plan](sup-race-calendar-plan.md#outstanding-questions).
