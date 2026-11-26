@@ -45,7 +45,7 @@
     "@pandacss/dev": "2.5.0",
     "@pandacss/preset-base": "2.2.0",
     "@pandacss/preset-panda": "2.1.2",
-    "@playwright/test": "1.63.0",
+    "@playwright/test": "1.65.1",
     "@sustainablewebsites/verdant-design": "0.1.1",
     "@vitest/coverage-v8": "5.0.3",
     "astro": "7.4.13",
