@@ -53,3 +53,5 @@ Use the existing site layout, skip link, navigation, theme and Verdant semantic 
 ## Non-goals and review decisions
 
 The first release covers race discovery through a readable regional listing. Individual event pages, maps, filters, reminders, ICS/RSS, submissions, results, payments and a new crawler are outside scope. This proposal adds no runtime service. Before release, settle ownership of time-sensitive corrections and the refresh policy described in the [plan](sup-race-calendar-plan.md#outstanding-questions).
+
+A later release could publish a subscribable iCalendar (.ics) feed at a permanent URL such as `/races/calendar.ics`, generated from the same approved records as the page. Derive each event’s iCalendar `UID` from its immutable race occurrence ID. A reschedule changes the dates under that UID. A cancellation retains the UID and sets `STATUS:CANCELLED`. When a subscriber’s calendar refreshes, it can apply either change to the existing event.

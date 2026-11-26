@@ -44,6 +44,10 @@ After the manual path and editorial ownership are approved, separately authorize
 
 **Accept when** a dry run with recorded observations demonstrates a new occurrence, repeat, correction, conflict and cancellation, including retry after a PR was created but its response was lost. Confirm that no-change days stay quiet and that the watch's existing notifications still work. Any credentials, workflow activation, refresh schedule or release require separate approval.
 
+## After the first release
+
+A future subscribable .ics feed could use a permanent URL and the approved race collection. When implementing it, test three successive feed versions for one race, starting with its original listing, then rescheduling it and finally cancelling it. All three must use the same `UID` derived from the stable race ID. Refresh a calendar subscription and verify that the existing event moves to the new date and then reflects `STATUS:CANCELLED` without creating a duplicate. Choose a retention period for cancelled entries so subscribers can pick up the change between refreshes.
+
 ## Initial leads awaiting independent verification
 
 The November 25 watch report supplied these names. All three remain outside public data. The report also lacked verifiable original announcement dates. First discovery must not be presented as the announcement date.
